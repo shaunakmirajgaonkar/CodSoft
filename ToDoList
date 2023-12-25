@@ -1,0 +1,55 @@
+import os
+
+def display_menu():
+    print("\nTo-Do List")
+    print("1. View To-Do List")
+    print("2. Add Task to the list")
+    print("3. Update Task in the list")
+    print("4. Exit")
+
+def view_todo_list(todo_list):
+    print("\nCurrent To-Do List:")
+    for task, status in todo_list.items():
+        print(f"{task}: {status}")
+
+def add_task(todo_list):
+    task = input("Enter the new task: ")
+    todo_list[task] = "Incomplete"
+    print(f"Task '{task}' added successfully!")
+
+def update_task(todo_list):
+    view_todo_list(todo_list)
+    task_to_update = input("\nEnter the task to update: ")
+
+    if task_to_update in todo_list:
+        new_status = input("Enter the new status (Complete/Incomplete): ").capitalize()
+        if new_status == "Complete" or new_status == "Incomplete":
+            todo_list[task_to_update] = new_status
+            print(f"Task '{task_to_update}' updated successfully!")
+        else:
+            print("Invalid status. Please enter 'Complete' or 'Incomplete'.")
+    else:
+        print(f"Task '{task_to_update}' not found in the to-do list.")
+
+def main():
+    todo_list = {}
+
+    while True:
+        display_menu()
+
+        choice = input("\nEnter your choice (1-4): ")
+
+        if choice == "1":
+            view_todo_list(todo_list)
+        elif choice == "2":
+            add_task(todo_list)
+        elif choice == "3":
+            update_task(todo_list)
+        elif choice == "4":
+            print("Exiting the To-Do List Application. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1 and 4.")
+
+if __name__ == "__main__":
+    main()
